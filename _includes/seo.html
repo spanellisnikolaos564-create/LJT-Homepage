@@ -22,10 +22,8 @@
 {% endif %}
 <meta name="description" content="{{ seo_description }}">
 
-{% comment %} ===== Social share image =====
-Use a page image or a configured site image only. Do not substitute a template
-image when no personal image has been provided.
-{% endcomment %}
+{% comment %} Use only an image supplied for this site; do not fall back to a
+ template image when no personal image has been provided. {% endcomment %}
 {% assign seo_image_abs = false %}
 {% if page.header.image %}
   {% if page.header.image contains "://" %}
@@ -41,8 +39,6 @@ image when no personal image has been provided.
   {% endif %}
 {% elsif site.og_image %}
   {% assign seo_image_abs = site.og_image | prepend: "/images/" | prepend: base_path %}
-{% else %}
-  {% assign seo_image_abs = "" %}
 {% endif %}
 
 {% assign seo_author = page.author | default: page.author[0] | default: site.author[0] %}
@@ -142,11 +138,6 @@ image when no personal image has been provided.
 {% endif %}
 {% if seo_image_abs %}
   <meta property="og:image" content="{{ seo_image_abs }}">
-  {% if seo_image_abs contains "og-image.png" %}
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-  {% endif %}
 {% endif %}
 
 {% if site.og_image %}
