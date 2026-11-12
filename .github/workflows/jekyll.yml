@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
 
 concurrency:
   group: "pages"
@@ -46,13 +45,3 @@ jobs:
           publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
-      - name: Configure Pages publishing source
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api repos/${{ github.repository }}/pages -X POST -f build_type=legacy -F 'source[branch]=gh-pages' -F 'source[path]=/'
-      - name: Check published homepage
-        run: |
-          curl -sI -L -o /dev/null -w 'Homepage HTTP status: %{http_code}\n' https://spanellisnikolaos564-create.github.io/LJT-Homepage/
-          curl -sI -L -o /dev/null -w 'Publications HTTP status: %{http_code}\n' https://spanellisnikolaos564-create.github.io/LJT-Homepage/publications/
