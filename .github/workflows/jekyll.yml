@@ -45,3 +45,7 @@ jobs:
           publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
+      - name: Check published homepage
+        run: |
+          curl -sI -L -o /dev/null -w 'Homepage HTTP status: %{http_code}\n' https://spanellisnikolaos564-create.github.io/LJT-Homepage/
+          curl -sI -L -o /dev/null -w 'Publications HTTP status: %{http_code}\n' https://spanellisnikolaos564-create.github.io/LJT-Homepage/publications/
